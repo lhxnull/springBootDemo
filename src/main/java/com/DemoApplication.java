@@ -34,6 +34,7 @@ public class DemoApplication extends SpringBootServletInitializer {
 
 
 	public static void main(String[] args) {
+
 		System.out.println("*******************************");
 		System.out.println("start SpringApplication.run");
 		System.out.println("*******************************");
