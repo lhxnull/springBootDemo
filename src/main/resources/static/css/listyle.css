@@ -1,0 +1,175 @@
+/* CSS Document */
+
+
+/*
+TABLE.result {
+	WIDTH: 100%
+}
+.result TH {
+	TEXT-ALIGN: left; WIDTH: 31px; VERTICAL-ALIGN: top
+}
+.result TH DIV {
+	MARGIN: 4px 0px 0px 7px; WIDTH: 19px; BACKGROUND: url(images/markers_new_653df87.png) no-repeat; HEIGHT: 29px; _background: url(http://webmap1.map.bdimg.com/newmap/static/common/images/markers_new_ie6_843ae9b.png) no-repeat
+}
+.result TH DIV.bl_icon {
+	BACKGROUND: url(http://webmap1.map.bdimg.com/newmap/static/common/images/bgs_6dbfd12.gif) no-repeat -103px -212px; HEIGHT: 20px
+}
+.result TH DIV.sl_icon {
+	BACKGROUND: url(http://webmap1.map.bdimg.com/newmap/static/common/images/bgs_6dbfd12.gif) no-repeat -158px -212px; HEIGHT: 20px
+}
+.result TH DIV.gj {
+	WIDTH: 16px; BACKGROUND: #df1b00; HEIGHT: 16px
+}
+.result TH DIV.icon {
+	CURSOR: pointer
+}*/
+.result {
+  WIDTH:30px;  
+}
+.result  .img {
+	MARGIN: 10px 0px 0px 7px; WIDTH: 19px; BACKGROUND: url(../images/markers_new_653df87.png) no-repeat; HEIGHT: 29px; _background: url(http://webmap1.map.bdimg.com/newmap/static/common/images/markers_new_ie6_843ae9b.png) no-repeat;
+	
+	
+}
+.result  .defalut #no1 {
+	BACKGROUND-POSITION: 0px -198px;
+}
+
+result .icon-groupon#no1 {
+	BACKGROUND-POSITION: 0px -262px; _background-position: 0 -64px
+}
+.result .defalut #no2 {
+	BACKGROUND-POSITION: -24px -198px; _background-position: -24px 0
+}
+.result .icon-groupon#no2 {
+	BACKGROUND-POSITION: -24px -262px; _background-position: -24px -64px
+}
+.result  .defalut #no3 {
+	BACKGROUND-POSITION: -48px -198px; _background-position: -48px 0
+}
+.result .icon-groupon#no3 {
+	BACKGROUND-POSITION: -48px -262px; _background-position: -48px -64px
+}
+.result  .defalut  #no4 {
+	BACKGROUND-POSITION: -72px -198px; _background-position: -72px 0
+}
+.result .icon-groupon#no4 {
+	BACKGROUND-POSITION: -72px -262px; _background-position: -72px -64px
+}
+.result  .defalut  #no5 {
+	BACKGROUND-POSITION: -96px -198px; _background-position: -96px 0
+}
+.result .icon-groupon#no5 {
+	BACKGROUND-POSITION: -96px -262px; _background-position: -96px -64px
+}
+.result  .defalut #no6 {
+	BACKGROUND-POSITION: -120px -198px; _background-position: -120px 0
+}
+.result .icon-groupon#no6 {
+	BACKGROUND-POSITION: -120px -262px; _background-position: -120px -64px
+}
+.result  .defalut  #no7 {
+	BACKGROUND-POSITION: -144px -198px; _background-position: -144px 0
+}
+.result .icon-groupon#no7 {
+	BACKGROUND-POSITION: -144px -262px; _background-position: -144px -64px
+}
+.result  .defalut  #no8 {
+	BACKGROUND-POSITION: -168px -198px; _background-position: -168px 0
+}
+.result .icon-groupon#no8 {
+	BACKGROUND-POSITION: -168px -262px; _background-position: -168px -64px
+}
+.result  .defalut  #no9 {
+	BACKGROUND-POSITION: -192px -198px; _background-position: -192px 0
+}
+.result .icon-groupon#no9 {
+	BACKGROUND-POSITION: -192px -262px; _background-position: -192px -64px
+}
+.result  .defalut #no10 {
+	BACKGROUND-POSITION: -216px -198px; _background-position: -216px 0
+}
+.result .icon-groupon#no10 {
+	BACKGROUND-POSITION: -216px -262px; _background-position: -216px -64px
+}
+.result TD {
+	PADDING-BOTTOM: 3px; LINE-HEIGHT: 160%; PADDING-LEFT: 3px; PADDING-RIGHT: 0px; FONT-SIZE: 12px; VERTICAL-ALIGN: top; PADDING-TOP: 2px
+}
+.result TR.focus {
+	BACKGROUND: #f0f0f0
+}
+.result DIV.focus {
+	BACKGROUND: #f0f0f0
+}
+.result TR.focus-over {
+	BACKGROUND: #f0f0f0; CURSOR: pointer
+}
+.result DIV.focus-over {
+	BACKGROUND: #f0f0f0; CURSOR: pointer
+}
+.result .focus-over #no1 {
+	BACKGROUND-POSITION: 0px -230px; _background-position: 0 -32px
+}
+.result .focus #no1 {
+	BACKGROUND-POSITION: 0px -230px; _background-position: 0 -32px
+}
+.result .focus-over #no2 {
+	BACKGROUND-POSITION: -24px -230px; _background-position: -24px -32px
+}
+.result .focus #no2 {
+	BACKGROUND-POSITION: -24px -230px; _background-position: -24px -32px
+}
+.result .focus-over #no3 {
+	BACKGROUND-POSITION: -48px -230px; _background-position: -48px -32px
+}
+.result .focus #no3 {
+	BACKGROUND-POSITION: -48px -230px; _background-position: -48px -32px
+}
+.result .focus-over #no4 {
+	BACKGROUND-POSITION: -72px -230px; _background-position: -72px -32px
+}
+.result .focus #no4 {
+	BACKGROUND-POSITION: -72px -230px; _background-position: -72px -32px
+}
+.result .focus-over #no5 {
+	BACKGROUND-POSITION: -96px -230px; _background-position: -96px -32px
+}
+.result .focus #no5 {
+	BACKGROUND-POSITION: -96px -230px; _background-position: -96px -32px
+}
+.result .focus-over #no6 {
+	BACKGROUND-POSITION: -120px -230px; _background-position: -120px -32px
+}
+.result .focus #no6 {
+	BACKGROUND-POSITION: -120px -230px; _background-position: -120px -32px
+}
+.result .focus-over #no7 {
+	BACKGROUND-POSITION: -144px -230px; _background-position: -144px -32px
+}
+.result .focus #no7 {
+	BACKGROUND-POSITION: -144px -230px; _background-position: -144px -32px
+}
+.result .focus-over #no8 {
+	BACKGROUND-POSITION: -168px -230px; _background-position: -168px -32px
+}
+.result .focus #no8 {
+	BACKGROUND-POSITION: -168px -230px; _background-position: -168px -32px
+}
+.result .focus-over #no9 {
+	BACKGROUND-POSITION: -192px -230px; _background-position: -192px -32px
+}
+.result .focus #no9 {
+	BACKGROUND-POSITION: -192px -230px; _background-position: -192px -32px
+}
+.result .focus-over #no10 {
+	BACKGROUND-POSITION: -216px -230px; _background-position: -216px -32px
+}
+.result .focus #no10 {
+	BACKGROUND-POSITION: -216px -230px; _background-position: -216px -32px
+}
+.result .pic {
+	BORDER-BOTTOM: #3a31df 1px solid; BORDER-LEFT: #3a31df 1px solid; MARGIN: 3px 5px 0px 0px; FLOAT: left; BORDER-TOP: #3a31df 1px solid; BORDER-RIGHT: #3a31df 1px solid
+}
+.result_holder {
+	POSITION: relative; HEIGHT: 434px; OVERFLOW: hidden
+}
