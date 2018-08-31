@@ -83,7 +83,7 @@
 
     <!--登陆-->
     <div class="container" style="position: absolute;left: 120px;">
-        <form class="form-signin" action="${request.contextPath}/login.do" method="post" id="loginForm">
+        <form class="form-signin" action="" method="post" id="loginForm">
 
             <h2 class="form-signin-heading">账户登陆</h2>
             <div class="form-group">
@@ -94,7 +94,7 @@
             </div>
             <div class="form-group">
                 <input type="text" class="form-control" name="captcha" id="inputCaptcha" placeholder="验证码"/>
-                <img src="${request.contextPath}/user/getGifCode.do" id="captcha">
+                <img src="/user/getGifCode" id="captcha">
             </div>
 
             <div class="checkbox">
@@ -107,7 +107,7 @@
             </div>
             <button class="btn  btn-primary btn-block" id="submitButton" type="submit">立即登陆</button>
             <div class="form-group">
-                <a href="${request.contextPath}/goURL/user/toRegister.do">注册</a>
+                <a href="/goURL/toRegister.do">注册</a>
             </div>
         </form>
     </div>

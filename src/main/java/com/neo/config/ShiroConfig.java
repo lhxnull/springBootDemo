@@ -33,7 +33,7 @@ public class ShiroConfig {
         Map<String,String> filterChainDefinitionMap = new LinkedHashMap<String,String>();
         // 配置不会被拦截的链接 顺序判断,springboot访问static和templates资源的时候，
         // 路径是不包含他们自己的项目名的。同时在js中访问这些资源也是不能包含static和templates路径的
-//        filterChainDefinitionMap.put("/static/**", "anon");
+        filterChainDefinitionMap.put("/static/**", "anon");
         filterChainDefinitionMap.put("/bootstrap-3.3.7-dist/**", "anon");
         filterChainDefinitionMap.put("/common/**", "anon");
         filterChainDefinitionMap.put("/css/**", "anon");

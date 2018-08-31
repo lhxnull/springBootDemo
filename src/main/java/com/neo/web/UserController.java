@@ -24,7 +24,7 @@ public class UserController {
      */
     @RequestMapping(value = "/getGifCode", method = RequestMethod.GET)
     public void getGifCode(HttpServletResponse response, HttpServletRequest request) throws IOException {
-
+        System.out.println("gifffffffffffffffffffffffffffffffffffff");
         response.setHeader("Pragma", "No-cache");
         response.setHeader("Cache-Control", "no-cache");
         response.setDateHeader("Expires", 0);
@@ -35,7 +35,7 @@ public class UserController {
 
         /**
          * 把验证码写到浏览器后才能知道验证码的数据，才能把数据装到session中，在后台会报出异常，我认为这样设计得不好。虽然不影响使用
-         * @author ：ozc
+         * @author ：lhx
          */
         ServletOutputStream out = response.getOutputStream();
         captcha.out(out);
