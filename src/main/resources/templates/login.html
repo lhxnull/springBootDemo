@@ -94,7 +94,7 @@
             </div>
             <div class="form-group">
                 <input type="text" class="form-control" name="captcha" id="inputCaptcha" placeholder="验证码"/>
-                <img src="/user/getGifCode" id="captcha">
+                <img src="/anon/getGifCode" id="captcha">
             </div>
 
             <div class="checkbox">
@@ -102,12 +102,12 @@
                     <input type="checkbox" name="rememberMe"> 记住我
                 </label>
                 <label>
-                    <a href="${request.contextPath}/goURL/user/toForget.do">忘记密码</a>
+                    <a href="/anon/pages/toForget.do">忘记密码</a>
                 </label>
             </div>
             <button class="btn  btn-primary btn-block" id="submitButton" type="submit">立即登陆</button>
             <div class="form-group">
-                <a href="/goURL/toRegister.do">注册</a>
+                <a href="/anon/pages/toRegister.do">注册</a>
             </div>
         </form>
     </div>

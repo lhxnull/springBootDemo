@@ -15,7 +15,7 @@ import java.io.IOException;
  * Created by lhx on 2018/8/30.
  */
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/anon")
 public class UserController {
     /**
      * 生成验证码（Gif版本）
