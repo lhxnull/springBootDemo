@@ -29,7 +29,7 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 
 @SpringBootApplication
 //扫描 listener、Filter、servlet；
-@ServletComponentScan(value = "com.example")
+@ServletComponentScan(value = "com")
 public class DemoApplication extends SpringBootServletInitializer {
 
 
