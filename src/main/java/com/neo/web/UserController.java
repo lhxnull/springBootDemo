@@ -3,16 +3,15 @@ package com.neo.web;
 import com.example.demo.mailDemo.service.MailService;
 import com.neo.entity.User;
 import com.neo.sevice.UserService;
-import com.utils.DateUtil;
 import com.utils.ReadPropertiesUtil;
 import com.utils.StringUtils;
 import com.utils.vcode.Captcha;
 import com.utils.vcode.GifCaptcha;
+import org.apache.catalina.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,7 +23,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -53,15 +51,20 @@ public class UserController {
         response.setContentType("image/gif");
 
         // gif格式动画验证码 宽，高，位数。
-        Captcha captcha = new GifCaptcha(146, 42, 4);
+        GifCaptcha captcha = new GifCaptcha(146, 42, 4);
 
         /**
          * 把验证码写到浏览器后才能知道验证码的数据，才能把数据装到session中，在后台会报出异常，我认为这样设计得不好。虽然不影响使用
+         * 已改
          * @author ：lhx
          */
-        ServletOutputStream out = response.getOutputStream();
-        captcha.out(out);
+        char[] rands = captcha.getMessage();
         request.getSession().setAttribute("captcha", captcha.text().toLowerCase());
+        System.out.println("验证码`````````````````````````````````````````````````````");
+        System.out.println(request.getSession().getAttribute("captcha"));
+        System.out.println("`````````````````````````````````````````````````````");
+        ServletOutputStream out = response.getOutputStream();
+        captcha.out(out,rands);
     }
 
     /**

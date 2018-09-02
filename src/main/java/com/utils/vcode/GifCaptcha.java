@@ -30,8 +30,17 @@ public class GifCaptcha extends Captcha {
         this.font = font;
     }
 
+    public char[] getMessage(){
+        char[] rands = alphas();
+        return rands;
+    }
+
     @Override
-    public void out(OutputStream os) {
+    public void out(OutputStream os){
+
+    }
+
+    public void out(OutputStream os,char[] rands) {
         try {
             GifEncoder gifEncoder = new GifEncoder();   // gif编码类，这个利用了洋人写的编码类，所有类都在附件中
             //生成字符
@@ -40,7 +49,6 @@ public class GifCaptcha extends Captcha {
             gifEncoder.setDelay(100);
             gifEncoder.setRepeat(0);
             BufferedImage frame;
-            char[] rands = alphas();
 
 
 

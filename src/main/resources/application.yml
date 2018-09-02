@@ -6,7 +6,7 @@ type: java
 
 spring:
   thymeleaf:
-    cache: false
+    cache: true
     mode: LEGACYHTML5
 #    enabled: false
 #  mvc:

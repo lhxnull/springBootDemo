@@ -35,9 +35,10 @@ $(function () {
            }
        },
         submitHandler: function (validator, form, submitButton) {
+           request.getSession.setAttribute()
             //ajax请求
             $.ajax({
-                url: path + "/login.do",
+                url: path + "/login",
                 type: "post",
                 async: false,
                 data: $("#loginForm").serialize(),
@@ -54,12 +55,12 @@ $(function () {
                     } else {
 
                         //出错了也回到首页吧
-                        window.location.href = path + "/login.html";
+                        window.location.href = path + "/login";
                     }
 
                     //只要错误了，就设置验证码为空，同时更新验证码
                     $("#inputCaptcha").val("");
-                    $("#captcha").attr("src", path + "/user/getGifCode.do?time=" + new Date().getTime());
+                    $("#captcha").attr("src", path + "/anon/getGifCode?time=" + new Date().getTime());
                     $("#submitButton").removeAttr("disabled");
 
                 },
@@ -77,6 +78,6 @@ $(function () {
 
     //点击图片换一张验证码
     $("#captcha").click(function () {
-        $(this).attr("src", path + "/user/getGifCode.do?time=" + new Date().getTime());
+        $(this).attr("src", path + "/anon/getGifCode?time=" + new Date().getTime());
     });
 });
