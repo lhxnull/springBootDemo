@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletOutputStream;
@@ -117,27 +118,21 @@ public class UserController {
     /**
      * 激活
      * @param userId
-     * @param writer
+     * @param
      * @return
      */
-    @RequestMapping(value = "/activate.do?{userId}")
-    public String activate(@PathVariable("userId")String userId,PrintWriter writer){
+    @RequestMapping(value = "/activate.do",method = RequestMethod.GET)
+    public String activate(@RequestParam("userId")String userId, RedirectAttributes attr){
 
         User user = userService.findOne(userId);
-        String title = "";
         String content = "";
-        String result = "";
         if(user != null){
             //得到当前时间和邮件时间对比,24小时内
             if (System.currentTimeMillis() - user.getTokenExptime().getTime() < 86400000) {
                 user.setActiState(User.ACTIVATION_SUCCESSFUL);
                 userService.save(user);
-                title = "用户激活页面";
-                result = "用户激活";
                 content = "恭喜您成功激活账户";
             } else {
-                title = "激活失败页面";
-                result = "用户激活";
                 content = "激活链接已超时，请重新注册";
 
                 //删除记录已便用户再次注册
@@ -145,10 +140,7 @@ public class UserController {
 
             }
         }
-
-        String subject = title+":"+result+","+content;
-        writer.write(subject);
-
+        attr.addAttribute("content",content);
         return "redirect:/anon/common/promptPages.do";
 
     }

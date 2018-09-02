@@ -1,4 +1,5 @@
 /*表单验证以及提交------------------------start*/
+
 $(function () {
     //bootstrap校验
     $('form').bootstrapValidator({
@@ -68,17 +69,29 @@ $(function () {
                     console.log(responseText);
                     if (responseText == "noEmail") {
                         validator.defaultSubmit();
-                        sweetAlert("请到您指定的邮箱完成激活");
+                        activationHints("请到您的邮箱完成注册");
                     } else {
-                        sweetAlert("您的邮箱已注册过了");
+                        activationHints("您的邮箱已经注册过");
                     }
                 },
                 error: function () {
-                    sweetAlert("系统错误！");
+                    activationHints("系统错误！");
                 }
             });
         }
     });
+
+    function activationHints(content) {
+        swal({
+            title: '激活提示',
+            html: $('<div>')
+                .addClass('some-class')
+                .text(content),
+            animation: false,
+            customClass: 'animated tada'
+        });
+    }
 });
+
 
 /*表单验证以及提交------------------------end*/
