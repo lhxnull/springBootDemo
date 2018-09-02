@@ -1,17 +1,10 @@
 package com.neo.config;
 
-import com.neo.entity.SysPermission;
-import com.neo.entity.SysRole;
+import com.neo.entity.ActiveUser;
 import com.neo.entity.User;
-import com.neo.entity.UserInfo;
-import com.neo.sevice.UserInfoService;
 import com.neo.sevice.UserService;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
-import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
@@ -45,20 +38,29 @@ public class MyShiroRealm extends AuthorizingRealm {
         System.out.println("MyShiroRealm.doGetAuthenticationInfo()");
         //获取用户的输入的账号.
         String username = (String)token.getPrincipal();
+        //得到密码
+        String password = new String((char[])token.getCredentials());
         System.out.println(token.getCredentials());
         //通过username从数据库中查找 User对象，如果找到，没找到.
         //实际项目中，这里可以根据实际情况做缓存，如果不做，Shiro自己也是有时间间隔机制，2分钟内不会重复执行该方法
         User user = userService.findByUserEmail(username);
         System.out.println("----->>userInfo="+user);
-        if(user == null){
+        if(user == null || User.ACTIVATION_UNSUCCESSFUL==user.getActiState()){
             return null;
         }
+
+        //将数据存到用户的身份信息实体中
+        ActiveUser activeUser = new ActiveUser();
+        activeUser.setUserId(user.getUserId());
+        activeUser.setUserEmail(user.getUserEmail());
+        activeUser.setUserNickname(user.getUserNickname());
+        activeUser.setPassword(password);
+
+
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
-                user, //用户名
-                user.getUserPassword(), //密码
-                ByteSource.Util.bytes(user.getUserPassword()),//salt=username+salt
-                getName()  //realm name
-        );
+                activeUser,
+                user.getUserPassword(),
+                this.getName());
         return authenticationInfo;
     }
 

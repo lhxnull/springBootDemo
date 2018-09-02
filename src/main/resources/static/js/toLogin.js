@@ -35,7 +35,6 @@ $(function () {
            }
        },
         submitHandler: function (validator, form, submitButton) {
-           request.getSession.setAttribute()
             //ajax请求
             $.ajax({
                 url: path + "/login",

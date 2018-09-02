@@ -28,7 +28,7 @@ public class User {
     private String userNickname;
 
     @NotNull(message="{user.not.null}")
-    @Size(min=6,max=12,message="{user.userPassword.length.error}")
+    @Size(message="{user.userPassword.length.error}")
     @Column(name = "user_password")
     private String userPassword;
 

@@ -3,6 +3,7 @@ package com.neo.web;
 import com.example.demo.mailDemo.service.MailService;
 import com.neo.entity.User;
 import com.neo.sevice.UserService;
+import com.utils.MD5Utils;
 import com.utils.ReadPropertiesUtil;
 import com.utils.StringUtils;
 import com.utils.vcode.Captcha;
@@ -105,6 +106,7 @@ public class UserController {
         user.setUserId(UUID.randomUUID().toString());
         user.setActiState(User.ACTIVATION_UNSUCCESSFUL);
         user.setTokenExptime(new Date());
+        user.setUserPassword(MD5Utils.md5(user.getUserPassword()+user.getSalt()));
         userService.save(user);
         String projectUrl = ReadPropertiesUtil.readProp("projectPath");
         String url = projectUrl+"/anon/activate.do?userId=" + user.getUserId();

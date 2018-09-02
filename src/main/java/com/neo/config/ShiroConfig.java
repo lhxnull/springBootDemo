@@ -30,7 +30,15 @@ public class ShiroConfig {
         System.out.println("@^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
-
+        //自己定义的filter，用来验证输入的验证码。
+        //这里说一下，默认情况下，FormAuthenticationFilter会寻找名为请求参数username，password和rememberMe。
+        //如果这些与您在表单中使用的表单字段名称不同，则需要在其上配置名称
+        Map<String, Filter> filters = new LinkedHashMap<>();
+        UserFormAuthenticationFilter filter = new UserFormAuthenticationFilter();
+        filter.setUsernameParam("userEmail");
+        filter.setPasswordParam("userPassword");
+        filters.put("authc",filter);
+        shiroFilterFactoryBean.setFilters(filters);
         //拦截器.
         Map<String,String> filterChainDefinitionMap = new LinkedHashMap<String,String>();
         // 配置不会被拦截的链接 顺序判断,springboot访问static和templates资源的时候，
@@ -55,9 +63,6 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setSuccessUrl("/index");
         //未授权界面;
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");
-        Map<String, Filter> filters = new LinkedHashMap<>();
-        filters.put("authc",new UserFormAuthenticationFilter());
-        shiroFilterFactoryBean.setFilters(filters);
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
@@ -73,7 +78,7 @@ public class ShiroConfig {
     public HashedCredentialsMatcher hashedCredentialsMatcher(){
         HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
         hashedCredentialsMatcher.setHashAlgorithmName("md5");//散列算法:这里使用MD5算法;
-        hashedCredentialsMatcher.setHashIterations(2);//散列的次数，比如散列两次，相当于 md5(md5(""));
+        hashedCredentialsMatcher.setHashIterations(1);//散列的次数，比如散列两次，相当于 md5(md5(""));
         return hashedCredentialsMatcher;
     }
 
@@ -118,4 +123,6 @@ public class ShiroConfig {
         //r.setWarnLogCategory("example.MvcLogger");     // No default
         return r;
     }
+
+
 }
