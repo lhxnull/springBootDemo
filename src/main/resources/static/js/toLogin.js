@@ -44,11 +44,11 @@ $(function () {
                 success: function (responseText) {
                     console.log(responseText);
                     if (responseText.message == "验证码错误") {
-                        sweetAlert("验证码错误");
+                        activationHints("验证码错误");
                     } else if (responseText.message == "密码错误") {
-                        sweetAlert("密码错误");
+                        activationHints("密码错误");
                     } else if (responseText.message == "账号不存在/没有在邮箱中激活账户") {
-                        sweetAlert("账号不存在/账户未激活");
+                        activationHints("账号不存在/账户未激活");
                     } else if (responseText.message == "登陆成功") {
                         window.location.href = path + "/index.html";
                     } else {
@@ -79,4 +79,15 @@ $(function () {
     $("#captcha").click(function () {
         $(this).attr("src", path + "/anon/getGifCode?time=" + new Date().getTime());
     });
+
+    function activationHints(content) {
+        swal({
+            title: '激活提示',
+            html: $('<div>')
+                .addClass('some-class')
+                .text(content),
+            animation: false,
+            customClass: 'animated tada'
+        });
+    }
 });

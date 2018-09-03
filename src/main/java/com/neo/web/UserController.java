@@ -16,6 +16,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
@@ -24,9 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Created by lhx on 2018/8/30.
@@ -107,19 +106,13 @@ public class UserController {
         user.setActiState(User.ACTIVATION_UNSUCCESSFUL);
         user.setTokenExptime(new Date());
         user.setSalt(MathUtil.getRandom620(4));
-        String password = new Md5Hash("111111", user.getSalt(), 1).toString();
+        String password = new Md5Hash(user.getUserPassword(), user.getSalt(), 1).toString();
         user.setUserPassword(password);
         userService.save(user);
         String projectUrl = ReadPropertiesUtil.readProp("projectPath");
         String url = projectUrl+"/anon/activate.do?userId=" + user.getUserId();
         mailService.sendHtmlMail(user.getUserEmail(),"激活",url);
         return "redirect:/anon/common/countDown.do";
-    }
-
-    @RequestMapping(value = "/test")
-    public String test(){
-        return "redirect:/anon/common/countDown.do";
-
     }
 
     /**
@@ -150,6 +143,61 @@ public class UserController {
         attr.addAttribute("content",content);
         return "redirect:/anon/common/promptPages.do";
 
+    }
+
+    /**
+     * 发送重置密码邮件
+     * @param userEmail
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "forgetPassword")
+    public String forgetPassword(String userEmail) throws Exception {
+
+        //在form表单提交时已经判断判断是否有该用户了。
+        User user = null;
+        if(StringUtils.isNotBlank(userEmail)){
+
+            user = userService.findByUserEmail(userEmail);
+        }
+        String projectUrl = ReadPropertiesUtil.readProp("projectPath");
+        String url = projectUrl+"/anon/pages/resetView.do?userId=" + user.getUserId();
+        mailService.sendHtmlMail(user.getUserEmail(),"重置密码",url);
+        //设置邮件发送时间、30分钟链接失效
+        user.setTokenExptime(new Date());
+        userService.save(user);
+        return "/login";
+
+    }
+
+    /**
+     * 重置密码
+     * @param user
+     * @return
+     */
+    @RequestMapping(value = "/resetPassword")
+    @ResponseBody
+    public Map<String, Object> resetPassword(User user) {
+        Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
+        if (user != null && user.getUserId() != null) {
+            User user1 = userService.findOne(user.getUserId());
+            //得到当前时间和邮件时间对比,24小时
+            if (System.currentTimeMillis() - user1.getTokenExptime().getTime() < 86400000) {
+                String password = new Md5Hash(user.getUserPassword(), user.getSalt(), 1).toString();
+                user1.setUserPassword(password);
+                User user2 = userService.save(user1);
+                if (user2 != null){
+                    resultMap.put("message", "修改成功");
+                } else {
+                    resultMap.put("message", "修改失败");
+                }
+            } else {
+                resultMap.put("message", "链接已超时，请重新进行操作");
+
+            }
+            return resultMap;
+        }
+        return null;
     }
 
 }

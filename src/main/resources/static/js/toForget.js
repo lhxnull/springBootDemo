@@ -28,7 +28,7 @@ $(function () {
         submitHandler: function (validator, form, submitButton) {
             var $email = $("#userEmail").val();
             $.ajax({
-                url: path + "/user/validateEmail.do",
+                url: path + "/anon/validateEmail.do",
                 type: "post",
                 async: false,
                 data: {
@@ -37,17 +37,28 @@ $(function () {
                 success: function (responseText) {
                     if (responseText == "hasEmail") {
                         validator.defaultSubmit();
-                        sweetAlert("请到您指定的邮箱完成重置密码操作");
+                        activationHints("请到您指定的邮箱完成重置密码操作");
                     } else {
-                        sweetAlert("您的邮箱并没有注册过，请注册");
+                        activationHints("您的邮箱并没有注册过，请注册");
                     }
                 },
                 error: function () {
-                    sweetAlert("系统错误！");
+                    activationHints("系统错误！");
                 }
             });
         }
     });
+
+    function activationHints(content) {
+        swal({
+            title: '激活提示',
+            html: $('<div>')
+                .addClass('some-class')
+                .text(content),
+            animation: false,
+            customClass: 'animated tada'
+        });
+    }
 });
 
 
