@@ -3,12 +3,12 @@ package com.neo.web;
 import com.example.demo.mailDemo.service.MailService;
 import com.neo.entity.User;
 import com.neo.sevice.UserService;
-import com.utils.MD5Utils;
-import com.utils.ReadPropertiesUtil;
-import com.utils.StringUtils;
+import com.utils.*;
 import com.utils.vcode.Captcha;
 import com.utils.vcode.GifCaptcha;
 import org.apache.catalina.Session;
+import org.apache.shiro.crypto.hash.Md5Hash;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -60,7 +60,7 @@ public class UserController {
          * @author ：lhx
          */
         char[] rands = captcha.getMessage();
-        request.getSession().setAttribute("captcha", captcha.text().toLowerCase());
+        WebUtils.setValue2Session(request,"captcha",captcha.text().toLowerCase());
         System.out.println("验证码`````````````````````````````````````````````````````");
         System.out.println(request.getSession().getAttribute("captcha"));
         System.out.println("`````````````````````````````````````````````````````");
@@ -106,7 +106,9 @@ public class UserController {
         user.setUserId(UUID.randomUUID().toString());
         user.setActiState(User.ACTIVATION_UNSUCCESSFUL);
         user.setTokenExptime(new Date());
-        user.setUserPassword(MD5Utils.md5(user.getUserPassword()+user.getSalt()));
+        user.setSalt(MathUtil.getRandom620(4));
+        String password = new Md5Hash("111111", user.getSalt(), 1).toString();
+        user.setUserPassword(password);
         userService.save(user);
         String projectUrl = ReadPropertiesUtil.readProp("projectPath");
         String url = projectUrl+"/anon/activate.do?userId=" + user.getUserId();

@@ -28,4 +28,8 @@ public class MathUtil {
        }
        return result;
 	}
+
+	public static void main(String[] args) {
+		System.out.println(MathUtil.getRandom620(4));
+	}
 }
