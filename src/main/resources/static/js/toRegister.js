@@ -69,7 +69,7 @@ $(function () {
                     console.log(responseText);
                     if (responseText == "noEmail") {
                         validator.defaultSubmit();
-                        activationHints("请到您的邮箱完成注册");
+                        // activationHints("请到您的邮箱完成注册");
                     } else {
                         activationHints("您的邮箱已经注册过");
                     }

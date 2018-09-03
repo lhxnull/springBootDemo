@@ -63,13 +63,19 @@ public class MailServiceImpl implements MailService {
     public void sendHtmlMail(String to, String subject, String content) {
         MimeMessage message = mailSender.createMimeMessage();
 
+        String strHtml="<html>\n" +
+                "<body>\n" +
+                "    <h3>请点击下方链接!</h3>\n" +
+                "<a href="+content+">helloworld</a>"+
+                "</body>\n" +
+                "</html>";
         try {
             //true表示需要创建一个multipart message
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
             helper.setFrom(from);
             helper.setTo(to);
             helper.setSubject(subject);
-            helper.setText(content, true);
+            helper.setText(strHtml, true);
             mailSender.send(message);
             System.out.println("html邮件已发送");
         } catch (MessagingException e) {

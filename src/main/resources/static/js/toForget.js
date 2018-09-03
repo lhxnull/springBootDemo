@@ -35,10 +35,12 @@ $(function () {
                     "userEmail": $email
                 },
                 success: function (responseText) {
-                    if (responseText == "hasEmail") {
+                    //因为后台成功之后会做重定向跳转，导致这个信息显示时间太短，所以成功页面让我直接放在了重定向页面展示。
+                    // validator.defaultSubmit();
+                    // activationHints("请到您指定的邮箱完成重置密码操作");
+                    if(responseText == "hasEmail"){
                         validator.defaultSubmit();
-                        activationHints("请到您指定的邮箱完成重置密码操作");
-                    } else {
+                    }else {
                         activationHints("您的邮箱并没有注册过，请注册");
                     }
                 },
