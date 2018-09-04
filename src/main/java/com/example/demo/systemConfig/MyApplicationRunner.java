@@ -2,7 +2,6 @@ package com.example.demo.systemConfig;
 
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,11 +12,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class MyApplicationRunner implements ApplicationRunner {
 
-//    private ApplicationContext applicationContext;
     @Override
     public void run(ApplicationArguments applicationArguments) throws Exception {
         System.out.println("*********************************");
         System.out.println("...init resources by implements ApplicationRunner");
+        SystemConfigManager.getInstance().fillComeCodeConfigs();
         System.out.println("*********************************");
     }
 }
