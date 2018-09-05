@@ -16,6 +16,7 @@ public class MyApplicationRunner implements ApplicationRunner {
     public void run(ApplicationArguments applicationArguments) throws Exception {
         System.out.println("*********************************");
         System.out.println("...init resources by implements ApplicationRunner");
+        System.out.println(SystemConfigManager.getInstance());
         SystemConfigManager.getInstance().fillComeCodeConfigs();
         System.out.println("*********************************");
     }
