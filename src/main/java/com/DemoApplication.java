@@ -40,6 +40,7 @@ public class DemoApplication extends SpringBootServletInitializer {
 		System.out.println("start SpringApplication.run");
 		System.out.println("*******************************");
 		SpringApplication.run(DemoApplication.class, args);
+		System.out.println(SystemConfigManager.getInstance());
 		System.out.println(SystemConfigManager.getInstance().getComCodeLoadConfigMap().get("email"));
 		System.out.println("end SpringApplication.run");
 	}

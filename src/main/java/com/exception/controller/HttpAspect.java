@@ -26,7 +26,7 @@ public class HttpAspect {
     @Autowired
     private ExceptionHandle exceptionHandle;
 
-    @Pointcut("execution(public * com.zzp.controller.*.*(..))")
+    @Pointcut("execution(public * com.*.*(..))")
     public void log(){
 
     }
@@ -65,6 +65,7 @@ public class HttpAspect {
 
     @AfterReturning(pointcut = "log()",returning = "object")//打印输出结果
     public void doAfterReturing(Object object){
+
         LOGGER.info("response={}",object.toString());
     }
 }
