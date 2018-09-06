@@ -6,7 +6,7 @@ type: java
 
 spring:
   thymeleaf:
-    cache: true
+    cache: false
     mode: LEGACYHTML5
 #    enabled: false
 #  mvc:
@@ -37,12 +37,12 @@ spring:
             dialect: org.hibernate.dialect.MySQL5Dialect
 
 
-logging:
-  level:
-    xatu.zsl: debug
-    org.springfromework.web: info
-    org.hibernate: error
-  file: log\myspringboot.log
+#logging:
+#  level:
+#    xatu.zsl: debug
+#    org.springfromework.web: info
+#    org.hibernate: error
+#  file: log\myspringboot.log
 
 
 
