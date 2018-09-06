@@ -1,7 +1,12 @@
 package com.wchstrife.controller;
 
+import com.neo.entity.ActiveUser;
+import com.neo.entity.User;
+import com.neo.sevice.UserService;
 import com.wchstrife.entity.Article;
 import com.wchstrife.service.ArticleService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,11 +23,13 @@ import java.util.List;
  * Created by wangchenghao on 2017/7/31.
  */
 @Controller
-@RequestMapping("/article")
+@RequestMapping("/anon/article")
 public class ArticleController {
 
     @Autowired
-    ArticleService articleService;
+    private ArticleService articleService;
+//    @Autowired
+//    private UserService userService;
 
     @RequestMapping("/get/{id}")
     public String get(Model model, @PathVariable(name = "id") String id){
@@ -33,11 +40,13 @@ public class ArticleController {
     /*
     TODO：分页
      */
-    @RequestMapping("")
+    @RequestMapping({"/","/index"})
     public String list(Model model){
         List<Article> articles = articleService.list();
-        model.addAttribute("articles", articles);
 
+        model.addAttribute("articles", articles);
+        ActiveUser user = (ActiveUser)SecurityUtils.getSubject().getPrincipal();
+        model.addAttribute("userNickname", user.getUserNickname());
         return "/index";
     }
 

@@ -126,16 +126,27 @@
                         My Life, Like Sun!
                     </h4>
                 </a>
-                <div th:if="${not #lists.isEmpty(articles)}">
-                    <div th:each="articles:${articles}">
-                        <div class="row">
-                            <div class="container">
-                                <div class="jumbotron">
-                                    <h3 th:text="${articles.title}"></h3>
-                                    <span class="summary" th:text="${articles.summary}"></span><br/><br/>
-                                    <p><a class="btn btn-primary btn-lg" th:href="@{'/article/detail/'+${articles.id}}" role="button">阅读全文</a> </p>
+                <div class="list-group-item item_article" th:if="${not #lists.isEmpty(articles)}">
+                    <div class="row">
+                        <div class="div_center col-xs-9" th:each="articles:${articles}">
+
+                            <!--<div class="container">-->
+                                <div class="list-group-item-heading div_article_title">
+                                    <strong><h3 th:text="${articles.title}"></h3></strong>
+                                    <span class="list-group-item-text div_article_content" th:text="${articles.summary}">
+
+                                    </span><br/>
+                                    <p class="list-group-item-text div_article_content">
+                                        <a class="btn btn-primary btn-lg" th:href="@{'/anon/article/detail/'+${articles.id}}" role="button">
+                                            阅读全文
+                                        </a>
+                                    </p>
                                 </div>
-                            </div>
+                            <!--</div>-->
+                        </div>
+                        <!-- 右侧图片，信息 -->
+                        <div class="col-xs-3 div_right_info">
+                        <img class="iv_article img-rounded" src="/imgs/ic_android1.jpg">
                         </div>
                     </div>
                 </div>
