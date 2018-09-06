@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>Hello World</title>
+    <title>首页</title>
 
     <!-- Bootstrap -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -19,7 +19,8 @@
     <![endif]-->
 </head>
 <body>
-
+<!--引入导航栏-->
+<div th:include="/common/top :: top"></div>
 <!-- 右下角按钮 -->
 <!-- <button class="btn btn-default btn_right_bottom">写</button> -->
 <!-- 图片轮播 -->
@@ -125,25 +126,38 @@
                         My Life, Like Sun!
                     </h4>
                 </a>
-                <!-- 文章列表 -->
-                <div class="list-group-item item_article">
-                    <div class="row">
-                        <div class="div_center col-xs-9">
-                            <div class="list-group-item-heading div_article_title">
-                                <strong>
-                                    <a href="http://www.w3school.com.cn">W3School</a>
-                                </strong>
+                <div th:if="${not #lists.isEmpty(articles)}">
+                    <div th:each="articles:${articles}">
+                        <div class="row">
+                            <div class="container">
+                                <div class="jumbotron">
+                                    <h3 th:text="${articles.title}"></h3>
+                                    <span class="summary" th:text="${articles.summary}"></span><br/><br/>
+                                    <p><a class="btn btn-primary btn-lg" th:href="@{'/article/detail/'+${articles.id}}" role="button">阅读全文</a> </p>
+                                </div>
                             </div>
-                            <p class="list-group-item-text div_article_content">
-                                所有设计源于生活，框终点在于分层、层与层之间如何交流。
-                            </p>
-                        </div>
-                        <!-- 右侧图片，信息 -->
-                        <div class="col-xs-3 div_right_info">
-                            <img class="iv_article img-rounded" src="/imgs/ic_android1.jpg">
                         </div>
                     </div>
                 </div>
+                <!-- 文章列表 -->
+                <!--<div class="list-group-item item_article">-->
+                    <!--<div class="row">-->
+                        <!--<div class="div_center col-xs-9">-->
+                            <!--<div class="list-group-item-heading div_article_title">-->
+                                <!--<strong>-->
+                                    <!--<a href="http://www.w3school.com.cn">W3School</a>-->
+                                <!--</strong>-->
+                            <!--</div>-->
+                            <!--<p class="list-group-item-text div_article_content">-->
+                                <!--所有设计源于生活，框终点在于分层、层与层之间如何交流。-->
+                            <!--</p>-->
+                        <!--</div>-->
+                        <!--&lt;!&ndash; 右侧图片，信息 &ndash;&gt;-->
+                        <!--<div class="col-xs-3 div_right_info">-->
+                            <!--<img class="iv_article img-rounded" src="/imgs/ic_android1.jpg">-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
 
 
 
@@ -186,7 +200,11 @@
     </div>
 
 </div>
-
+<script type="text/javascript">
+    $(function(){
+        $('#loginForm').submit();
+    });
+</script>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="/js/jquery-3.3.1.min.js"></script>
