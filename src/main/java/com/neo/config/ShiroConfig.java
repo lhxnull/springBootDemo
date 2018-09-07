@@ -59,8 +59,8 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/logout", "logout");
         // 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
         shiroFilterFactoryBean.setLoginUrl("/login");
-        // 登录成功后要跳转的链接
-        shiroFilterFactoryBean.setSuccessUrl("/index");
+        // 登录成功后要跳转的链接这是到controller的，然而好像/front/toIndex这样的不行。
+        shiroFilterFactoryBean.setSuccessUrl("/toIndex");
         //未授权界面;
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");
 

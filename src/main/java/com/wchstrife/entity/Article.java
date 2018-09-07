@@ -1,6 +1,7 @@
 package com.wchstrife.entity;
 
 
+import com.neo.entity.User;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -18,23 +19,35 @@ public class Article {
     @Column(name = "id", columnDefinition = "varchar(64) binary")
     private String id;
 
-
+//标题
     @Column(name = "title")
     private String title;
-
+//内容
     @Column(name = "content" , columnDefinition = "text")
     private String content;
-
+//分类id
     @ManyToOne
     private Category category;
 
-
+//标签
     @Column(name = "summary", columnDefinition = "text")
     private String summary;
 
     @Column(name = "date", columnDefinition = "varchar(64)")
     private String date;
 
+    //
+    @ManyToOne
+    private User user;
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public User getUser() {
+
+        return user;
+    }
 
     public String getId() {
         return id;

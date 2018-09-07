@@ -14,10 +14,10 @@ import java.util.Map;
  */
 @Controller
 public class HomeController {
-    @RequestMapping({"/","/index"})
+    @RequestMapping({"/","/toIndex"})
     public String index(){
         System.out.println("index---------------");
-        return"index";
+        return"/front/toIndex";
     }
 
     @RequestMapping("/login")

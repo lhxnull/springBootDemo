@@ -23,7 +23,7 @@ import java.util.List;
  * Created by wangchenghao on 2017/7/31.
  */
 @Controller
-@RequestMapping("/anon/article")
+@RequestMapping("/article")
 public class ArticleController {
 
     @Autowired
@@ -40,7 +40,7 @@ public class ArticleController {
     /*
     TODO：分页
      */
-    @RequestMapping({"/","/index"})
+    @RequestMapping({"/index"})
     public String list(Model model){
         List<Article> articles = articleService.list();
 
@@ -50,6 +50,15 @@ public class ArticleController {
         return "/index";
     }
 
+//    @RequestMapping("/getOneself")
+//    public String getOneself(Model model){
+//        List<Article> articles = articleService.list();
+//
+//        model.addAttribute("articles", articles);
+//        ActiveUser user = (ActiveUser)SecurityUtils.getSubject().getPrincipal();
+//        model.addAttribute("userNickname", user.getUserNickname());
+//        return "/index";
+//    }
     /*
     按类型显示博客
      */

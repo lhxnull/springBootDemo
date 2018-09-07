@@ -1,5 +1,6 @@
 package com.wchstrife.entity;
 
+import com.neo.entity.User;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -22,6 +23,18 @@ public class Category {
 
     @Column(name = "display_name")
     private String displayName;
+
+    @ManyToOne
+    private User user;
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public User getUser() {
+
+        return user;
+    }
 
     public Category(String name, String displayName) {
         this.name = name;
