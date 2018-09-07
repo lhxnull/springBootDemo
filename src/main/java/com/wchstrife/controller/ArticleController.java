@@ -3,6 +3,7 @@ package com.wchstrife.controller;
 import com.neo.entity.ActiveUser;
 import com.neo.entity.User;
 import com.neo.sevice.UserService;
+import com.utils.StringUtils;
 import com.wchstrife.entity.Article;
 import com.wchstrife.service.ArticleService;
 import org.apache.shiro.SecurityUtils;
@@ -50,15 +51,25 @@ public class ArticleController {
         return "/index";
     }
 
-//    @RequestMapping("/getOneself")
-//    public String getOneself(Model model){
-//        List<Article> articles = articleService.list();
-//
-//        model.addAttribute("articles", articles);
-//        ActiveUser user = (ActiveUser)SecurityUtils.getSubject().getPrincipal();
-//        model.addAttribute("userNickname", user.getUserNickname());
-//        return "/index";
-//    }
+    /**
+     * 获取自己的分页。
+     * @param model
+     * @return
+     */
+    @RequestMapping("/getOneself")
+    public String getOneself(Model model,String type){
+        List<Article> articles;
+        ActiveUser user = (ActiveUser)SecurityUtils.getSubject().getPrincipal();
+        if("own".equals(type) && user !=null){
+            articles = articleService.getOneself(user.getUserId());
+        }else {
+            articles = articleService.list();
+        }
+
+        model.addAttribute("articles", articles);
+        model.addAttribute("userNickname", user.getUserNickname());
+        return "/index";
+    }
     /*
     按类型显示博客
      */

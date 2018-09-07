@@ -1,16 +1,33 @@
-/*----------------------表单验证以及提交表单----------------------start*/
 $(function () {
-    //点击图片换一张验证码
-    // $("#captcha").click(function () {
-    //     $(this).attr("src", path + "/anon/getGifCode?time=" + new Date().getTime());
-    // });
+    // ajax璇锋眰
     $("#btndiv .btn").click(function(){
-        alert($(this).button.val());
+        $.ajax({
+            url: path + "/article/getOneself",
+            type: "post",
+            async: false,
+            data: {
+                type:$(this).val()
+            },
+            success: function (responseText) {
+
+            },
+            error: function (response, ajaxOptions, thrownError) {
+                console.log(response);
+                console.log(ajaxOptions);
+                console.log(thrownError);
+                // sweetAlert("绯荤粺閿欒");
+            }
+        });
     });
+    // $("#btndiv .btn").click(function(){
+    //     // console.log($("input:radio[name='options']").val());
+    //     //lert($('input:radio:checked').val());
+    //     alert($(this).val());
+    // });
 
     // function activationHints(content) {
     //     swal({
-    //         title: '激活提示',
+    //         title: '锟斤拷锟斤拷锟斤拷示',
     //         html: $('<div>')
     //             .addClass('some-class')
     //             .text(content),

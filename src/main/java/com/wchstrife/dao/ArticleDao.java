@@ -19,4 +19,5 @@ public interface ArticleDao extends JpaRepository<Article, String> {
     @Query("from Article where title like %:title%")
     public List<Article> findByTitleLike(@Param("title") String title);
 
+    public List<Article> findAllByUser_UserId(String id);
 }

@@ -126,14 +126,12 @@
                         My Life, Like Sun!
                     </h4>
                 </a>
+
                 <div class="btn-group" data-toggle="buttons" id="btndiv">
-                    <label class="btn btn-primary">
-                        <input type="radio" name="options" id="option1" th:value="all"> 全    部
-                    </label>
-                    <label class="btn btn-primary">
-                        <input type="radio" name="options" id="option2" th:value="oneself"> 只看我的
-                    </label>
+                    <button type="button" class="btn btn-primary" name="name" value="all">查看全部</button>
+                    <button type="button" class="btn btn-primary" name="name" value="own">只看自己</button>
                 </div>
+
                 <div class="list-group-item item_article" th:if="${not #lists.isEmpty(articles)}">
                     <div class="row">
                         <div class="div_center col-xs-9" th:each="articles:${articles}">
@@ -224,6 +222,18 @@
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/init.js" type="text/script"></script>
 <script src="/js/util.js"></script>
+<!--使用JS获取项目根路径-->
+<script>
+    var path = "";
+    $(function () {
+        var strFullPath = window.document.location.href;
+        var strPath = window.document.location.pathname;
+        var pos = strFullPath.indexOf(strPath);
+        var prePath = strFullPath.substring(0, pos);
+        var postPath = strPath.substring(0, strPath.substr(1).indexOf('/') + 1);
+        path = prePath ;
+    });
+</script>
 <script src="/js/toIndex.js">
 
 </script>

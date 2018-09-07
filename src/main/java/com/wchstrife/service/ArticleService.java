@@ -1,5 +1,6 @@
 package com.wchstrife.service;
 
+import com.sun.xml.internal.ws.api.ha.StickyFeature;
 import com.wchstrife.dao.ArticleDao;
 import com.wchstrife.entity.Article;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,15 @@ public class ArticleService {
         return articles;
     }
 
+    /**
+     * 查询用户下所有
+     * @return
+     */
+    public List<Article> getOneself(String id){
+        List<Article> articles = articleDao.findAllByUser_UserId(id);
+
+        return articles;
+    }
     /**
      * 根据种类名称查询文章
      * @param categoryName

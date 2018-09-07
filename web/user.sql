@@ -8,4 +8,4 @@ CREATE TABLE `table_user` (
   `salt` varchar(50) NOT NULL COMMENT '随机盐，用于加密密码',
   `token_exptime` datetime NOT NULL COMMENT '用于判断邮箱链接有效时间',
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
