@@ -31,11 +31,6 @@ public class UserServiceImp implements UserService {
 
     @Override
     public void delete(String id) {
-        try {
-
             userDao.delete(id);
-        }catch (Exception e){
-            System.out.println(e.toString());
-        }
     }
 }

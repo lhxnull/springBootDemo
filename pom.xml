@@ -154,7 +154,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
-		<!--不严格检查-->
+		<!--不严格检查 thymeleaf 有严格的语法限制，会极大程度限制你的发挥，所以先把这个模板的严格去掉-->
 		<dependency>
 			<groupId>net.sourceforge.nekohtml</groupId>
 			<artifactId>nekohtml</artifactId>

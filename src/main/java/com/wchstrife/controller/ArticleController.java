@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.tautua.markdownpapers.Markdown;
 import org.tautua.markdownpapers.parser.ParseException;
 
@@ -52,15 +53,20 @@ public class ArticleController {
     }
 
     /**
-     * 获取自己的分页。
+     * 获取自己的分页。thymeleaf的局部刷新
      * @param model
      * @return
+     * "index"index.html的名，
+     *"table_refresh"是test.html中需要刷新的部分标志,
+     *在标签里加入：th:fragment="table_refresh"
      */
     @RequestMapping("/getOneself")
+//    @ResponseBody
     public String getOneself(Model model,String type){
         List<Article> articles;
         ActiveUser user = (ActiveUser)SecurityUtils.getSubject().getPrincipal();
-        if("own".equals(type) && user !=null){
+        if("own".equals(type) && user != null){
+
             articles = articleService.getOneself(user.getUserId());
         }else {
             articles = articleService.list();
@@ -68,7 +74,7 @@ public class ArticleController {
 
         model.addAttribute("articles", articles);
         model.addAttribute("userNickname", user.getUserNickname());
-        return "/index";
+        return "index::table_refresh";
     }
     /*
     按类型显示博客

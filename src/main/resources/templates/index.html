@@ -131,53 +131,25 @@
                     <button type="button" class="btn btn-primary" name="name" value="all">查看全部</button>
                     <button type="button" class="btn btn-primary" name="name" value="own">只看自己</button>
                 </div>
+                <!-- 文章列表 -->
+                <div th:if="${not #lists.isEmpty(articles)}" th:fragment="table_refresh" id="table_refresh">
+                    <div th:each="articles:${articles}" >
+                        <div class="row"  >
+                            <div class="jumbotron">
+                                <h3 th:text="${articles.title}"></h3>
+                                <span class="summary" th:text="${articles.summary}"></span><br/>
+                                <p>
+                                    <a class="btn btn-primary btn-lg" th:href="@{'/article/detail/'+${articles.id}}" role="button">
+                                    阅读全文
+                                        <!--<img class="iv_article img-rounded" src="/imgs/ic_android1.jpg">-->
+                                    </a>
+                                </p>
 
-                <div class="list-group-item item_article" th:if="${not #lists.isEmpty(articles)}">
-                    <div class="row">
-                        <div class="div_center col-xs-9" th:each="articles:${articles}">
-
-                            <!--<div class="container">-->
-                                <div class="list-group-item-heading div_article_title">
-                                    <strong><h3 th:text="${articles.title}"></h3></strong>
-                                    <span class="list-group-item-text div_article_content" th:text="${articles.summary}">
-
-                                    </span><br/>
-                                    <p class="list-group-item-text div_article_content">
-                                        <a class="btn btn-primary btn-lg" th:href="@{'/article/detail/'+${articles.id}}" role="button">
-                                            阅读全文
-                                        </a>
-                                    </p>
-                                </div>
-                            <!--</div>-->
-                        </div>
-                        <!-- 右侧图片，信息 -->
-                        <div class="col-xs-3 div_right_info">
-                        <img class="iv_article img-rounded" src="/imgs/ic_android1.jpg">
+                            </div>
+                            <!--右侧图片，信息-->
                         </div>
                     </div>
                 </div>
-                <!-- 文章列表 -->
-                <!--<div class="list-group-item item_article">-->
-                    <!--<div class="row">-->
-                        <!--<div class="div_center col-xs-9">-->
-                            <!--<div class="list-group-item-heading div_article_title">-->
-                                <!--<strong>-->
-                                    <!--<a href="http://www.w3school.com.cn">W3School</a>-->
-                                <!--</strong>-->
-                            <!--</div>-->
-                            <!--<p class="list-group-item-text div_article_content">-->
-                                <!--所有设计源于生活，框终点在于分层、层与层之间如何交流。-->
-                            <!--</p>-->
-                        <!--</div>-->
-                        <!--&lt;!&ndash; 右侧图片，信息 &ndash;&gt;-->
-                        <!--<div class="col-xs-3 div_right_info">-->
-                            <!--<img class="iv_article img-rounded" src="/imgs/ic_android1.jpg">-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-
-
-
             </div>
         </div>
         <!-- 右侧 -->
@@ -234,8 +206,36 @@
         path = prePath ;
     });
 </script>
-<script src="/js/toIndex.js">
-
+<script>
+//    /*<![CDATA[*/
+//    var message = [[${articles}]];
+//    console.log(message);
+//
+//    /*]]>*/
+//    $(function () {
+//        var message = [[${session.userNickname}]];
+        // ajax请求
+        $("#btndiv .btn").click(function(){
+            $('#table_refresh').load("/article/getOneself?type="+$(this).val());
+//            $.ajax({
+//                url: path + "/article/getOneself",
+//                type: "post",
+//                async: false,
+//                data: {
+//                    type:$(this).val()
+//                },
+//                success: function (responseText) {
+//
+//                },
+//                error: function (response, ajaxOptions, thrownError) {
+//                    console.log(response);
+//                    console.log(ajaxOptions);
+//                    console.log(thrownError);
+//                    // sweetAlert("系统错误");
+//                }
+//            });
+        });
+//    });
 </script>
 </body>
 </html>
