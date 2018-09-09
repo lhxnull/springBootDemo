@@ -22,9 +22,23 @@
             <div th:utext="${article.content}"></div>
         </div>
     </div>
+    <button type="button" class="btn btn-info" onclick="javascript:history.back(-1);">返回上一页</button>
+    <button type="button" class="btn btn-info" onclick="javascript:window.location.href=path+'/article/index';">返 回 主 页</button>
 </div>
 
 <script th:href="@{/js/jquery-3.3.1.min.js}" type="text/javascript"></script>
 <script th:href="@{/bootstrap-3.3.7-dist/js/bootstrap.js}"></script>
+<script type="text/JavaScript">
+
+    var path = "";
+    $(function () {
+        var strFullPath = window.document.location.href;
+        var strPath = window.document.location.pathname;
+        var pos = strFullPath.indexOf(strPath);
+        var prePath = strFullPath.substring(0, pos);
+        var postPath = strPath.substring(0, strPath.substr(1).indexOf('/') + 1);
+        path = prePath;
+    });
+</script>
 </body>
 </html>

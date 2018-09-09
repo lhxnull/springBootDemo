@@ -1,7 +1,8 @@
 /*----------------------表单验证以及提交表单----------------------start*/
 $(function () {
-    //bootstrap校验
-    $('form').bootstrapValidator({
+    if($(!"input[type='checkbox']").attr('checked')){
+        //bootstrap校验
+        $('form').bootstrapValidator({
        message: 'This value is not valid',
        feedbackIcons: {
            valid: 'glyphicon glyphicon-ok',
@@ -74,7 +75,7 @@ $(function () {
             //validator.defaultSubmit();
         }
     });
-
+    }
     //点击图片换一张验证码
     $("#captcha").click(function () {
         $(this).attr("src", path + "/anon/getGifCode?time=" + new Date().getTime());

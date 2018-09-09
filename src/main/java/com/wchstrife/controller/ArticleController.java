@@ -2,23 +2,25 @@ package com.wchstrife.controller;
 
 import com.neo.entity.ActiveUser;
 import com.neo.entity.User;
-import com.neo.sevice.UserService;
-import com.utils.StringUtils;
+import com.utils.DateUtil;
 import com.wchstrife.entity.Article;
+import com.wchstrife.entity.Category;
 import com.wchstrife.service.ArticleService;
+import com.wchstrife.service.CategoryService;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.tautua.markdownpapers.Markdown;
 import org.tautua.markdownpapers.parser.ParseException;
 
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -30,8 +32,10 @@ public class ArticleController {
 
     @Autowired
     private ArticleService articleService;
-//    @Autowired
-//    private UserService userService;
+    @Autowired
+    private CategoryService categoryService;
+
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
     @RequestMapping("/get/{id}")
     public String get(Model model, @PathVariable(name = "id") String id){
@@ -39,21 +43,22 @@ public class ArticleController {
         return "index";
     }
 
-    /*
-    TODO：分页
+    /**
+     * 首次进入
+     * @param model
+     * @return
      */
     @RequestMapping({"/index"})
     public String list(Model model){
         List<Article> articles = articleService.list();
-
-        model.addAttribute("articles", articles);
         ActiveUser user = (ActiveUser)SecurityUtils.getSubject().getPrincipal();
+        model.addAttribute("articles", articles);
         model.addAttribute("userNickname", user.getUserNickname());
         return "/index";
     }
 
     /**
-     * 获取自己的分页。thymeleaf的局部刷新
+     * 查询全部或者自己的文章，thymeleaf的局部刷新
      * @param model
      * @return
      * "index"index.html的名，
@@ -76,8 +81,13 @@ public class ArticleController {
         model.addAttribute("userNickname", user.getUserNickname());
         return "index::table_refresh";
     }
-    /*
-    按类型显示博客
+
+    /**
+     * 按类型显示博客
+     * @param dispalyname
+     * @param category
+     * @param model
+     * @return
      */
     @RequestMapping("/column/{displayname}/{category}")
     public String column(@PathVariable("displayname") String dispalyname, @PathVariable("category") String category, Model model){
@@ -112,6 +122,12 @@ public class ArticleController {
         return "front/detail";
     }
 
+    /**
+     * 搜索
+     * @param key
+     * @param model
+     * @return
+     */
     @RequestMapping("/search")
     public String search(String key, Model model){
         List<Article> articles = articleService.search(key);
@@ -120,4 +136,82 @@ public class ArticleController {
         return "front/columnPage";
     }
 
+    /**
+     * 后台管理
+     * @param model
+     * @return
+     */
+    @RequestMapping("/Administration")
+    public String admin(Model model){
+        ActiveUser user = (ActiveUser)SecurityUtils.getSubject().getPrincipal();
+        List<Article>   articles = articleService.getOneself(user.getUserId());
+        model.addAttribute("articles", articles);
+
+        return "front/powermanage";
+    }
+
+    /**
+     * 删除博客
+     * @param id
+     * @return
+     */
+    @RequestMapping("/delete/{id}")
+    public String delete(@PathVariable("id") String id){
+        articleService.delete(id);
+
+        return "redirect:/article/Administration";
+    }
+
+    /**
+     * 写博客
+     * @param model
+     * @return
+     */
+    @RequestMapping("/write")
+    public String write(Model model){
+        List<Category> categories = categoryService.list();
+        model.addAttribute("categories", categories);
+        model.addAttribute("article", new Article());
+
+        return "front/write";
+    }
+
+    /**
+     * 保存
+     * @param article
+     * @return
+     */
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public String save(Article article){
+        //设置种类
+        String name = article.getCategory().getName();
+        Category category = categoryService.fingdByName(name);
+        article.setCategory(category);
+        //设置摘要,取前40个字
+        article.setDate(DateUtil.sDateFormat());
+        ActiveUser activeUser = (ActiveUser)SecurityUtils.getSubject().getPrincipal();
+        User user = new User();
+        user.setUserId(activeUser.getUserId());
+        article.setUser(user);
+        articleService.save(article);
+
+        return "redirect:/article/Administration";
+    }
+
+    /**
+     * 修改
+     * @param id
+     * @param model
+     * @return
+     */
+    @RequestMapping("/update/{id}")
+    public String update(@PathVariable("id") String id, Model model){
+        Article article = articleService.getById(id);
+        model.addAttribute("target", article);
+        List<Category> categories = categoryService.list();
+        model.addAttribute("categories", categories);
+        model.addAttribute("article", new Article());
+
+        return "front/update";
+    }
 }
