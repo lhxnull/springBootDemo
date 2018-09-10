@@ -8,7 +8,7 @@ import javax.persistence.*;
  * Created by wangchenghao on 2017/7/31.
  */
 @Entity
-@Table(name = "comments")
+@Table(name = "comments.sql")
 public class Comments {
 
     @Id

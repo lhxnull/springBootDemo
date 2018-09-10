@@ -380,9 +380,9 @@ CodeMirror.defineMode("sql", function(config, parserConfig) {
     * doubleQuote
     * nCharCast: N'string'
     * charsetCast: _utf8'string'
-    * commentHash: use # char for comments
-    * commentSlashSlash: use // for comments
-    * commentSpaceRequired: require a space after -- for comments
+    * commentHash: use # char for comments.sql
+    * commentSlashSlash: use // for comments.sql
+    * commentSpaceRequired: require a space after -- for comments.sql
   atoms:
     Keywords that must be highlighted as atoms,. Some DBMS's support more atoms than others:
     UNKNOWN, INFINITY, UNDERFLOW, NaN...
