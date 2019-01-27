@@ -167,7 +167,7 @@ public class UserController {
             user = userService.findByUserEmail(userEmail);
         }
         String projectUrl = ReadPropertiesUtil.readProp("projectPath");
-        String url = projectUrl+"anon/pages/resetView.do?userId=" + user.getUserId();
+        String url = projectUrl+"/anon/pages/resetView.do?userId=" + user.getUserId();
         mailService.sendHtmlMail(userEmail,"重置",url);
         //设置邮件发送时间、30分钟链接失效
         user.setTokenExptime(new Date());

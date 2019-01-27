@@ -106,7 +106,7 @@ public class ShiroConfig {
         //设置Realm，用于获取认证凭证
         securityManager.setRealm(myShiroRealm());
 //        //注入缓存管理器
-        securityManager.setCacheManager(ehCacheManager());
+//        securityManager.setCacheManager(ehCacheManager());
         //注入Cookie(记住我)管理器(remenberMeManager)
         securityManager.setRememberMeManager(rememberMeManager());
         return securityManager;

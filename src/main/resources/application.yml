@@ -35,7 +35,9 @@ spring:
       properties:
          hibernate:
             dialect: org.hibernate.dialect.MySQL5Dialect
-
+server:
+  port: 8080
+  context-path: /demo
 
 #logging:
 #  level:

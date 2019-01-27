@@ -3,7 +3,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>${title}</title>
 
-    <link href="/imgs/favicon.ico" type="image/x-icon" rel="shortcut icon"/>
+    <link href="/demo/imgs/favicon.ico" type="image/x-icon" rel="shortcut icon"/>
 
     <style type="text/css">
         <!--
@@ -34,18 +34,15 @@
 
 </div>
 
-<script src="/js/jquery-3.2.1.min.js"></script>
+<script src="/demo/js/jquery-3.2.1.min.js"></script>
 <script type="text/JavaScript">
 
-    var path = "";
-    $(function () {
         var strFullPath = window.document.location.href;
         var strPath = window.document.location.pathname;
         var pos = strFullPath.indexOf(strPath);
         var prePath = strFullPath.substring(0, pos);
         var postPath = strPath.substring(0, strPath.substr(1).indexOf('/') + 1);
-        path = prePath;
-    });
+        var  path = prePath+postPath;
 
 
     var secs = 5; //倒计时的秒数

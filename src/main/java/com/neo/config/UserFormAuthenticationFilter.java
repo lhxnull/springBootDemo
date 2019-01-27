@@ -167,7 +167,7 @@ public class UserFormAuthenticationFilter extends FormAuthenticationFilter {
             WebUtils.printCNJSON("{\"message\":\"登陆成功\"}", httpServletResponse);
         } else {
             //设置它跳转到首页路径，如果不设置它还会停留在登陆页面。
-            String indexPath = ReadPropertiesUtil.readProp("projectPath") + "/index";
+            String indexPath = ReadPropertiesUtil.readProp("projectPath") + "/toIndex";
             org.apache.shiro.web.util.WebUtils.redirectToSavedRequest(request, response, indexPath);
         }
         return false;

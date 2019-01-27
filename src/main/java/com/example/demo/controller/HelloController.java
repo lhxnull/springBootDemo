@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
  @RestController则是相当于@Controller@ResponseBody两个注解，该类返回的都是数据，不返回页面
  */
 @RestController//该注解是 @Controller 和 @ResponseBody 注解的合体版
-@RequestMapping("/demo")
 public class HelloController {
     @RequestMapping("/hello")
     public String hello() {

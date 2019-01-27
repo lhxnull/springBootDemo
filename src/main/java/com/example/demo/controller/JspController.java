@@ -27,7 +27,7 @@ public class JspController {
 //        model.addAttribute("now", DateFormat.getDateTimeInstance().format(new Date()));
 //        return "index";
 //    }
-    @RequestMapping("/demo/firstJsp")
+    @RequestMapping("/firstJsp")
     public void hello(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("now", DateFormat.getDateTimeInstance().format(new Date()));
         request.getRequestDispatcher("/pages/index.jsp").forward(request, response);

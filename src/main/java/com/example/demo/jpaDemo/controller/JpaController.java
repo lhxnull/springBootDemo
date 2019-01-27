@@ -29,7 +29,7 @@ public class JpaController {
      * @throws ServletException
      * @throws IOException
      */
-    @RequestMapping("/demo/jpaDemo")
+    @RequestMapping("/jpaDemo")
     public void findStudent(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<JpaStudent> students = jpaStudentService.findAll();
         request.setAttribute("students", students);
@@ -38,7 +38,7 @@ public class JpaController {
 //        return "redirect:/pages/listStudent.jsp";
     }
 
-    @RequestMapping(value = "/demo/queryById/{id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/queryById/{id}",method = RequestMethod.GET)
 //    public String queryById(@PathVariable String id, Model model){
     public void queryById(@PathVariable String id,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         JpaStudent stu = jpaStudentService.getJpaStudentById(id);
@@ -50,16 +50,16 @@ public class JpaController {
      * 返回字符串json什么的
      * @return
      */
-    @RequestMapping(value = "/demo/success")
+    @RequestMapping(value = "/success")
     @ResponseBody
     public String isSuccess(){
         return "success";
     }
 
-    @RequestMapping("/demo/403")
-    public String ruturnTemplates() {
-
-        return "403";
-    }
+//    @RequestMapping("/403")
+//    public String ruturnTemplates() {
+//
+//        return "403";
+//    }
 
 }

@@ -1,3 +1,3 @@
-window.onload = function {
-	alert("ddd")
+window.onload = function{
+	alert("ddd");
 }

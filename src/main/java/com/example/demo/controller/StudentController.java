@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
  * 这个是读取application.yml文件里属性的
  */
 @RestController
-@RequestMapping("/demo")
 public class StudentController {
     @Autowired
     private StudentProperties stu;

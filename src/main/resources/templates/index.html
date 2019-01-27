@@ -8,8 +8,8 @@
     <title>首页</title>
 
     <!-- Bootstrap -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <link href="/demo/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/demo/css/index.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -38,37 +38,37 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
         <div class="item active">
-            <img src="/imgs/ic_p4.jpg">
+            <img src="/demo/imgs/ic_p4.jpg">
             <p class="carousel-caption">
                 欲上青天揽明月
             </p>
         </div>
         <div class="item">
-            <img src="/imgs/ic_p5.jpg">
+            <img src="/demo/imgs/ic_p5.jpg">
             <p class="carousel-caption">
                 欲上青天揽明月
             </p>
         </div>
         <div class="item">
-            <img src="/imgs/ic_p6.jpg">
+            <img src="/demo/imgs/ic_p6.jpg">
             <p class="carousel-caption">
                 欲上青天揽明月
             </p>
         </div>
         <div class="item">
-            <img src="/imgs/ic_p7.jpg">
+            <img src="/demo/imgs/ic_p7.jpg">
             <p class="carousel-caption">
                 欲上青天揽明月
             </p>
         </div>
         <div class="item">
-            <img src="/imgs/ic_p8.jpg">
+            <img src="/demo/imgs/ic_p8.jpg">
             <p class="carousel-caption">
                 欲上青天揽明月
             </p>
         </div>
         <div class="item">
-            <img src="/imgs/ic_p9.jpg">
+            <img src="/demo/imgs/ic_p9.jpg">
             <p class="carousel-caption">
                 欲上青天揽明月
             </p>
@@ -91,7 +91,7 @@
         <div class="panel panel-default" id="pFunc1">
             <div class="panel-body">
                 <strong>欲上青天揽明月</strong>
-                <img class="iv_function" src="/imgs/ic_store.svg">
+                <img class="iv_function" src="/demo/imgs/ic_store.svg">
             </div>
         </div>
     </div>
@@ -99,7 +99,7 @@
         <div class="panel panel-default"  id="pFunc2">
             <div class="panel-body">
                 <strong>欲上青天揽明月</strong>
-                <img class="iv_function" src="/imgs/ic_remeber.svg">
+                <img class="iv_function" src="/demo/imgs/ic_remeber.svg">
             </div>
         </div>
     </div>
@@ -107,7 +107,7 @@
         <div class="panel panel-default"  id="pFunc3">
             <div class="panel-body">
                 <strong>欲上青天揽明月</strong>
-                <img class="iv_function" src="/imgs/ic_personal.svg">
+                <img class="iv_function" src="/demo/imgs/ic_personal.svg">
             </div>
         </div>
     </div>
@@ -156,7 +156,7 @@
         <div class="col-xs-3 div_record">
             <!-- 用户信息 -->
             <div class="jumbotron div_userinfo">
-                <img class="iv_user_head img-circle" src="/imgs/ic_p5.jpg">
+                <img class="iv_user_head img-circle" src="/demo/imgs/ic_p5.jpg">
                 <div style="display: inline-block; margin-left: 12px;font-size: 18px;" th:text="${userNickname}"></div>
             </div>
             <!-- 随手记录 -->
@@ -187,6 +187,13 @@
                         写
                     </button>
                 </div>
+                <div class="">
+                    <button class=""
+                            onclick="javascript:window.location.href=path+'/anon/pages/toForget.do';">
+                        修改密码
+                    </button>
+                </div>
+
             </div>
         </div>
     </div>
@@ -195,22 +202,19 @@
 
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/demo/js/jquery-3.3.1.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/init.js" type="text/script"></script>
-<script src="/js/util.js"></script>
+<script src="/demo/js/bootstrap.min.js"></script>
+<script src="/demo/js/init.js" type="text/script"></script>
+<script src="/demo/js/util.js"></script>
 <!--使用JS获取项目根路径-->
 <script>
-    var path = "";
-    $(function () {
         var strFullPath = window.document.location.href;
         var strPath = window.document.location.pathname;
         var pos = strFullPath.indexOf(strPath);
         var prePath = strFullPath.substring(0, pos);
         var postPath = strPath.substring(0, strPath.substr(1).indexOf('/') + 1);
-        path = prePath ;
-    });
+        var path = prePath+postPath ;
 </script>
 <script>
 //    /*<![CDATA[*/
@@ -222,7 +226,7 @@
 //        var message = [[${session.userNickname}]];
         // ajax请求
         $("#btndiv .btn").click(function(){
-            $('#table_refresh').load("/article/getOneself?type="+$(this).val());
+            $('#table_refresh').load("/demo/article/getOneself?type="+$(this).val());
 //            $.ajax({
 //                url: path + "/article/getOneself",
 //                type: "post",
